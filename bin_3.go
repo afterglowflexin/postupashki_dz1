@@ -8,10 +8,10 @@ package main
 import "fmt"
 
 func main() {
-	n := 5
-	k := 9
+	n := 3
+	k := 5
 
-	fmt.Println(FindMult(n, k))
+	fmt.Println(FindMult(n, k)) // 3
 }
 
 func FindMult(n, k int) int {
@@ -42,13 +42,22 @@ func Num(n, mult int) int {
 
 	ans := 0
 
+	// двигаем указатель r с конца вправо
 	for r >= 1 {
+		// для r находим первый l, для которого r*l > mult
 		for r*l <= mult {
 			l++
+
+			// если l уже вышел за границы, выходим из цикла
+			if l == n+1 {
+				break
+			}
 		}
 
+		// к ответу прибавляем l-1, потому что l - это первый элемент, для которого не выполняется условие, значит остальные l-1 элементов подходят
 		ans += l - 1
 
+		// сдвигаем r
 		r--
 	}
 

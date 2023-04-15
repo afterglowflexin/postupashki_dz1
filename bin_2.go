@@ -37,6 +37,8 @@ func MinChanges(s string, n, k int) int {
 
 // принимает строку, количество возможных изменений, возвращает максимально возможную длину подстроки, состоящей из одинаковых элементов
 func LongestSubstr(s string, changes int) int {
+	// Внутри проходимся по строке и обновляем два счетчика для 0 и 1. До тех пор, пока хотя бы один счетчик меньше или равен кол-ва возможных изменений,
+	// длину строки можно записать в ответ.
 	cntZero := 0
 	cntOne := 0
 
@@ -51,6 +53,7 @@ func LongestSubstr(s string, changes int) int {
 			cntOne++
 		}
 
+		// если оба счетчика стали больше кол-ва возможных изменений, сдвигаем левый указатель.
 		for cntOne > changes && cntZero > changes {
 			if s[l] == '0' {
 				cntZero--
@@ -61,6 +64,7 @@ func LongestSubstr(s string, changes int) int {
 			l++
 		}
 
+		// если длина строки больше максимального из уже найденных ответов, записываем его в ответ
 		if cntOne+cntZero > ans {
 			ans = cntOne + cntZero
 		}
